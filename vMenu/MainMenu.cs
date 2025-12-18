@@ -32,6 +32,7 @@ namespace vMenuClient
         public static Menu WorldSubmenu { get; private set; }
 
         public static PlayerOptions PlayerOptionsMenu { get; private set; }
+        public static Kb KbMenu { get; private set; }
         public static OnlinePlayers OnlinePlayersMenu { get; private set; }
         public static BannedPlayers BannedPlayersMenu { get; private set; }
         public static SavedVehicles SavedVehiclesMenu { get; private set; }
@@ -631,7 +632,17 @@ namespace vMenuClient
         /// </summary>
         private static void CreateSubmenus()
         {
-            // Add the online players menu.
+            if (IsAllowed(Permission.VOMenu))
+            {
+                KbMenu = new Kb();
+                var menu = KbMenu.GetMenu();
+                var button = new MenuItem("Keyboard/Keybinds", "View all keybinds for vMenu in this menu.")
+                {
+                    Label = "→→→"
+                };
+                AddMenu(Menu, menu, button);
+            }
+
             if (IsAllowed(Permission.OPMenu))
             {
                 OnlinePlayersMenu = new OnlinePlayers();

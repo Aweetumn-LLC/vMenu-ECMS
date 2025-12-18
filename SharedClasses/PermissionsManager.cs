@@ -12,6 +12,12 @@ namespace vMenuShared
     {
         public enum Permission
         {
+
+            // Display MSG
+            #region MSG
+            InfoAll,
+            #endregion
+
             // Global
             #region global
             Everything,
@@ -19,6 +25,12 @@ namespace vMenuShared
             DontBanMe,
             NoClip,
             Staff,
+            #endregion
+
+            //Keybinds
+            #region keybinds
+            KBMenu,
+            KBAll,
             #endregion
 
             // Online Players

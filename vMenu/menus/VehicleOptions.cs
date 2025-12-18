@@ -76,7 +76,7 @@ namespace vMenuClient.menus
             var vehGodMenuBtn = new MenuItem("God Mode Options", "Enable or disable specific damage types.") { Label = "→→→" };
             MenuController.AddSubmenu(menu, vehGodMenu);
 
-            // Create Checkboxes.
+            // Create Checkboxes. 
             var vehicleGod = new MenuCheckboxItem("Vehicle God Mode", "Makes your vehicle not take any damage. Note, you need to go into the god menu options below to select what kind of damage you want to disable.", VehicleGodMode);
             var vehicleNeverDirty = new MenuCheckboxItem("Keep Vehicle Clean", "This will constantly clean your car if the vehicle dirt level goes above 0. Note that this only cleans ~o~dust~s~ or ~o~dirt~s~. This does not clean mud, snow or other ~r~damage decals~s~. Repair your vehicle to remove them.", VehicleNeverDirty);
             var vehicleBikeSeatbelt = new MenuCheckboxItem("Bike Seatbelt", "Prevents you from being knocked off your bike, bicyle, ATV or similar.", VehicleBikeSeatbelt);
@@ -87,13 +87,16 @@ namespace vMenuClient.menus
             var vehicleNoSiren = new MenuCheckboxItem("Disable Siren", "Disables your vehicle's siren. Only works if your vehicle actually has a siren.", VehicleNoSiren);
             var vehicleNoBikeHelmet = new MenuCheckboxItem("No Bike Helmet", "No longer auto-equip a helmet when getting on a bike or quad.", VehicleNoBikeHelemet);
             var vehicleFreeze = new MenuCheckboxItem("Freeze Vehicle", "Freeze your vehicle's position.", VehicleFrozen);
-            var torqueEnabled = new MenuCheckboxItem("Enable Torque Multiplier", "Enables the torque multiplier selected from the list below.", VehicleTorqueMultiplier);
-            var powerEnabled = new MenuCheckboxItem("Enable Power Multiplier", "Enables the power multiplier selected from the list below.", VehiclePowerMultiplier);
+            //var torqueEnabled = new MenuCheckboxItem("Enable Torque Multiplier", "Enables the torque multiplier selected from the list below.", VehicleTorqueMultiplier);
+            //var powerEnabled = new MenuCheckboxItem("Enable Power Multiplier", "Enables the power multiplier selected from the list below.", VehiclePowerMultiplier);
             var highbeamsOnHonk = new MenuCheckboxItem("Flash Highbeams On Honk", "Turn on your highbeams on your vehicle when honking your horn. Does not work during the day when you have your lights turned off.", FlashHighbeamsOnHonk);
             var showHealth = new MenuCheckboxItem("Show Vehicle Health", "Shows the vehicle health on the screen.", VehicleShowHealth);
             var infiniteFuel = new MenuCheckboxItem("Infinite Fuel", "Enables or disables infinite fuel for this vehicle, only works if FRFuel is installed.", VehicleInfiniteFuel);
 
             // Create buttons.
+
+            var vehInfo = new MenuItem("Press F3 to open the Dyno UI", "Utilise our unique Vehicle dyno system to see the power, timing and more stats of your Vehicle");
+            var vehInfo2 = new MenuItem("Press F4 to open Vehicle Engine Swaps & Tuning", "Utilise our 1 of a kind Engine swap & Tuning system made for CarHaven Via Using F4");
             var fixVehicle = new MenuItem("Repair Vehicle", "Repair any visual and physical damage present on your vehicle.");
             var cleanVehicle = new MenuItem("Wash Vehicle", "Clean your vehicle.");
             var toggleEngine = new MenuItem("Toggle Engine On/Off", "Turn your engine on/off.");
@@ -196,10 +199,10 @@ namespace vMenuClient.menus
             };
             var setLicensePlateType = new MenuListItem("License Plate Type", licensePlates, 0, "Choose a license plate type and press ~r~enter ~s~to apply " +
                 "it to your vehicle.");
-            var torqueMultiplierList = new List<string> { "x2", "x4", "x8", "x16", "x32", "x64", "x128", "x256", "x512", "x1024" };
-            var torqueMultiplier = new MenuListItem("Set Engine Torque Multiplier", torqueMultiplierList, 0, "Set the engine torque multiplier.");
-            var powerMultiplierList = new List<string> { "x2", "x4", "x8", "x16", "x32", "x64", "x128", "x256", "x512", "x1024" };
-            var powerMultiplier = new MenuListItem("Set Engine Power Multiplier", powerMultiplierList, 0, "Set the engine power multiplier.");
+            //var torqueMultiplierList = new List<string> { "x2", "x4", "x8", "x16", "x32", "x64", "x128", "x256", "x512", "x1024" };
+            //var torqueMultiplier = new MenuListItem("Set Engine Torque Multiplier", torqueMultiplierList, 0, "Set the engine torque multiplier.");
+            //var powerMultiplierList = new List<string> { "x2", "x4", "x8", "x16", "x32", "x64", "x128", "x256", "x512", "x1024" };
+            //var powerMultiplier = new MenuListItem("Set Engine Power Multiplier", powerMultiplierList, 0, "Set the engine power multiplier.");
             var speedLimiterOptions = new List<string>() { "Set", "Reset", "Custom Speed Limit" };
             var speedLimiter = new MenuListItem("Speed Limiter", speedLimiterOptions, 0, "Set your vehicles max speed to your ~y~current speed~s~. Resetting your vehicles max speed will set the max speed of your current vehicle back to default. Only your current vehicle is affected by this option.");
             #endregion
@@ -247,6 +250,14 @@ namespace vMenuClient.menus
 
             #region Add items to the menu.
             // Add everything to the menu. (based on permissions)
+            if (IsAllowed(Permission.VOMenu)) // Veh Info sec1
+            {
+                menu.AddMenuItem(vehInfo);
+            }
+            if (IsAllowed(Permission.VOMenu))
+            {
+                menu.AddMenuItem(vehInfo2);
+            }
             if (IsAllowed(Permission.VOGod)) // GOD MODE
             {
                 menu.AddMenuItem(vehicleGod);
@@ -296,7 +307,7 @@ namespace vMenuClient.menus
                 };
 
             }
-            if (IsAllowed(Permission.VORepair)) // REPAIR VEHICLE
+            if (IsAllowed(Permission.VORepair)) // Veh Info sec2
             {
                 menu.AddMenuItem(fixVehicle);
             }
@@ -355,16 +366,16 @@ namespace vMenuClient.menus
             {
                 menu.AddMenuItem(speedLimiter);
             }
-            if (IsAllowed(Permission.VOTorqueMultiplier))
-            {
-                menu.AddMenuItem(torqueEnabled); // TORQUE ENABLED
-                menu.AddMenuItem(torqueMultiplier); // TORQUE LIST
-            }
-            if (IsAllowed(Permission.VOPowerMultiplier))
-            {
-                menu.AddMenuItem(powerEnabled); // POWER ENABLED
-                menu.AddMenuItem(powerMultiplier); // POWER LIST
-            }
+            //if (IsAllowed(Permission.VOTorqueMultiplier))
+            //{
+            //    menu.AddMenuItem(torqueEnabled); // TORQUE ENABLED
+            //    menu.AddMenuItem(torqueMultiplier); // TORQUE LIST
+            //}
+            //if (IsAllowed(Permission.VOPowerMultiplier))
+            //{
+            //    menu.AddMenuItem(powerEnabled); // POWER ENABLED
+            //    menu.AddMenuItem(powerMultiplier); // POWER LIST
+            //}
             if (IsAllowed(Permission.VODisableTurbulence))
             {
                 menu.AddMenuItem(vehicleNoTurbulence);
@@ -602,28 +613,28 @@ namespace vMenuClient.menus
                         }
                     }
                 }
-                else if (item == torqueEnabled) // Enable Torque Multiplier Toggled
-                {
-                    VehicleTorqueMultiplier = _checked;
-                }
-                else if (item == powerEnabled) // Enable Power Multiplier Toggled
-                {
-                    VehiclePowerMultiplier = _checked;
-                    if (_checked)
-                    {
-                        if (vehicle != null && vehicle.Exists())
-                        {
-                            SetVehicleEnginePowerMultiplier(vehicle.Handle, VehiclePowerMultiplierAmount);
-                        }
-                    }
-                    else
-                    {
-                        if (vehicle != null && vehicle.Exists())
-                        {
-                            SetVehicleEnginePowerMultiplier(vehicle.Handle, 1f);
-                        }
-                    }
-                }
+                //else if (item == torqueEnabled) // Enable Torque Multiplier Toggled
+                //{
+                //    VehicleTorqueMultiplier = _checked;
+                //}
+                //else if (item == powerEnabled) // Enable Power Multiplier Toggled
+                //{
+                //    VehiclePowerMultiplier = _checked;
+                //    if (_checked)
+                //    {
+                //        if (vehicle != null && vehicle.Exists())
+                //        {
+                //            SetVehicleEnginePowerMultiplier(vehicle.Handle, VehiclePowerMultiplierAmount);
+                //        }
+                //    }
+                //    else
+                //    {
+                //        if (vehicle != null && vehicle.Exists())
+                //        {
+                //            SetVehicleEnginePowerMultiplier(vehicle.Handle, 1f);
+                //        }
+                //    }
+                //}
                 else if (item == vehicleEngineAO) // Leave Engine Running (vehicle always on) Toggled
                 {
                     VehicleEngineAlwaysOn = _checked;
@@ -721,26 +732,26 @@ namespace vMenuClient.menus
                 {
                     var veh = GetVehicle();
                     // If the torque multiplier changed. Change the torque multiplier to the new value.
-                    if (item == torqueMultiplier)
-                    {
-                        // Get the selected value and remove the "x" in the string with nothing.
-                        var value = torqueMultiplierList[newIndex].ToString().Replace("x", "");
-                        // Convert the value to a float and set it as a public variable.
-                        VehicleTorqueMultiplierAmount = float.Parse(value);
-                    }
-                    // If the power multiplier is changed. Change the power multiplier to the new value.
-                    else if (item == powerMultiplier)
-                    {
-                        // Get the selected value. Remove the "x" from the string.
-                        var value = powerMultiplierList[newIndex].ToString().Replace("x", "");
-                        // Conver the string into a float and set it to be the value of the public variable.
-                        VehiclePowerMultiplierAmount = float.Parse(value);
-                        if (VehiclePowerMultiplier)
-                        {
-                            SetVehicleEnginePowerMultiplier(veh.Handle, VehiclePowerMultiplierAmount);
-                        }
-                    }
-                    else if (item == setLicensePlateType)
+                    //if (item == torqueMultiplier)
+                    //{
+                    //    // Get the selected value and remove the "x" in the string with nothing.
+                    //    var value = torqueMultiplierList[newIndex].ToString().Replace("x", "");
+                    //    // Convert the value to a float and set it as a public variable.
+                    //    VehicleTorqueMultiplierAmount = float.Parse(value);
+                    //}
+                    //// If the power multiplier is changed. Change the power multiplier to the new value.
+                    //else if (item == powerMultiplier)
+                    //{
+                    //    // Get the selected value. Remove the "x" from the string.
+                    //    var value = powerMultiplierList[newIndex].ToString().Replace("x", "");
+                    //    // Conver the string into a float and set it to be the value of the public variable.
+                    //    VehiclePowerMultiplierAmount = float.Parse(value);
+                    //    if (VehiclePowerMultiplier)
+                    //    {
+                    //        SetVehicleEnginePowerMultiplier(veh.Handle, VehiclePowerMultiplierAmount);
+                    //    }
+                    //}
+                    if (item == setLicensePlateType)
                     {
                         // Set the license plate style.
                         switch (newIndex)

@@ -1103,6 +1103,8 @@ namespace vMenuClient.menus
                 return currentCharacter.IsMale ? 0.7f : 0.95f;
             }
 
+            // Un-used to my knowledge but here for completeness.
+
             float ClampMix(int value)
             {
                 var sliderFraction = mixValues[value];
