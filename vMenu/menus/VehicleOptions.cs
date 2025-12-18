@@ -95,8 +95,8 @@ namespace vMenuClient.menus
 
             // Create buttons.
 
-            var vehInfo = new MenuItem("Press F3 to open the Dyno UI", "Utilise our unique Vehicle dyno system to see the power, timing and more stats of your Vehicle");
-            var vehInfo2 = new MenuItem("Press F4 to open Vehicle Engine Swaps & Tuning", "Utilise our 1 of a kind Engine swap & Tuning system made for CarHaven Via Using F4");
+            //var vehInfo = new MenuItem("Press F3 to open the Dyno UI", "Utilise our unique Vehicle dyno system to see the power, timing and more stats of your Vehicle");
+            //var vehInfo2 = new MenuItem("Press F4 to open Vehicle Engine Swaps & Tuning", "Utilise our 1 of a kind Engine swap & Tuning system made for CarHaven Via Using F4");
             var fixVehicle = new MenuItem("Repair Vehicle", "Repair any visual and physical damage present on your vehicle.");
             var cleanVehicle = new MenuItem("Wash Vehicle", "Clean your vehicle.");
             var toggleEngine = new MenuItem("Toggle Engine On/Off", "Turn your engine on/off.");

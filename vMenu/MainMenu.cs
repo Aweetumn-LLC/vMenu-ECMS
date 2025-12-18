@@ -33,6 +33,8 @@ namespace vMenuClient
 
         public static PlayerOptions PlayerOptionsMenu { get; private set; }
         public static Kb KbMenu { get; private set; }
+
+        public static QuickActions QuickActionsMenu { get; private set; }
         public static OnlinePlayers OnlinePlayersMenu { get; private set; }
         public static BannedPlayers BannedPlayersMenu { get; private set; }
         public static SavedVehicles SavedVehiclesMenu { get; private set; }
@@ -643,7 +645,19 @@ namespace vMenuClient
                 AddMenu(Menu, menu, button);
             }
 
-            if (IsAllowed(Permission.OPMenu))
+            if (IsAllowed(Permission.VOMenu))
+            {
+            QuickActionsMenu = new QuickActions();
+            var menu = QuickActionsMenu.GetMenu();
+            var button = new MenuItem("Quick Actions", "Utilise all quick actions here.")
+                {
+                    Label = "→→→"
+                };
+            AddMenu(Menu, menu, button);
+            }
+
+
+                if (IsAllowed(Permission.OPMenu))
             {
                 OnlinePlayersMenu = new OnlinePlayers();
                 var menu = OnlinePlayersMenu.GetMenu();
