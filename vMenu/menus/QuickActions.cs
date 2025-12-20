@@ -3,40 +3,65 @@ using CitizenFX.Core.Native;
 
 using MenuAPI;
 
+using static CitizenFX.Core.Native.API;
+using static vMenuClient.data.VehicleData;
+
 namespace vMenuClient.menus
 {
     public class QuickActions : BaseScript
     {
         private Menu menu;
-
-        private MenuItem Replace;
-
-
+        private MenuItem RepairVehicle;
+        private MenuItem OpenRadio;
+        private MenuItem VehicleSpawner;
 
         private void CreateMenu()
         {
             menu = new Menu("vMenu", "Car Haven Actions");
 
-            Replace = new MenuItem("Placeholder", "Placeholder")
+            RepairVehicle = new MenuItem("Repair Vehicle", "This repairs your vehicle to full health.")
             {
                 Label = ""
             };
 
-            // Separator
-            menu.AddMenuItem(Replace);
+            OpenRadio = new MenuItem("Open Radio", "This will open the radio within your Vehicles.")
+            {
+                Label = ""
+            };
 
+            VehicleSpawner = new MenuItem("Open Addon Vehicles", "Spawn custom addon vehicles!")
+            {
+                Label = ""
+            };
 
-            // event triggers
+            menu.AddMenuItem(RepairVehicle);
+            menu.AddMenuItem(VehicleSpawner);
+            menu.AddMenuItem(OpenRadio);
+
             menu.OnItemSelect += (sender, item, index) =>
             {
-                if (item == Replace)
+                if (item == RepairVehicle)
                 {
-                    TriggerEvent("");
+                    int veh = API.GetVehiclePedIsIn(API.PlayerPedId(), false);
+
+                    if (veh != 0)
+                    {
+                        API.SetVehicleFixed(veh);
+                        API.SetVehicleDeformationFixed(veh);
+                        API.SetVehicleDirtLevel(veh, 0f);
+                        API.SetVehicleEngineHealth(veh, 1000f);
+                    }
                 }
-                //else if (item == Key2)
-                //{
-                //    TriggerEvent("txcl:setPlayerMode", "noclip", true);
-                //}
+                else if (item == OpenRadio)
+                {
+                    API.ExecuteCommand("openradiocarG");
+                }
+                else if (item == VehicleSpawner)
+                {
+                    var vehicleSpawner = new VehicleSpawner();
+                    MenuController.CloseAllMenus();
+                    vehicleSpawner.OpenAddonMenuDirect();
+                }
             };
         }
 

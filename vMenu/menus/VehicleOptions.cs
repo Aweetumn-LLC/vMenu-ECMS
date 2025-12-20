@@ -250,14 +250,6 @@ namespace vMenuClient.menus
 
             #region Add items to the menu.
             // Add everything to the menu. (based on permissions)
-            if (IsAllowed(Permission.VOMenu)) // Veh Info sec1
-            {
-                menu.AddMenuItem(vehInfo);
-            }
-            if (IsAllowed(Permission.VOMenu))
-            {
-                menu.AddMenuItem(vehInfo2);
-            }
             if (IsAllowed(Permission.VOGod)) // GOD MODE
             {
                 menu.AddMenuItem(vehicleGod);
